@@ -1,6 +1,6 @@
 #' Method overrides to display statistical results nicely.
 #'
-#' @version 0.1.1
+#' @version 0.1.2
 #' @date 2024-10-30
 #' @author Carsten Allefeld
 
@@ -161,6 +161,14 @@ summary.data.frame <- function(data) {
       }
     })
   )
+}
+
+knit_print.table <- function(al, options) {
+  al |>
+    base::as.data.frame.matrix() |>
+    # gt::gt(rownames_to_stub = TRUE) |>
+    knitr::kable(row.names = TRUE, align = "r") |>
+    knitr::knit_print()
 }
 
 # nolint end
