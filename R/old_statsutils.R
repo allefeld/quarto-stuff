@@ -176,53 +176,6 @@ confint_to_table <- function(ci) {
     )
 }
 
-# replacement for summary(data.frame)
-summary.data.frame <- function(data) {
-  names <- base::names(data)
-  types <- base::sapply(data, vctrs::vec_ptype_abbr)
-  tibble::tibble(
-    name = names,
-    type = gsub("chr", "**chr**", types),
-    n = base::format(base::colSums(!is.na(data))),
-    min = base::sapply(names, function(name) {
-      if (! types[name] %in% c("fct")) {
-        base::format(base::min(data[[name]], na.rm = TRUE))
-      } else {
-        "–"
-      }
-    }),
-    median = base::sapply(names, function(name) {
-      if (! types[name] %in% c("fct")) {
-        base::format(stats::quantile(data[[name]], 0.5, type = 1,
-                                     na.rm = TRUE))
-      } else {
-        "–"
-      }
-    }),
-    max = base::sapply(names, function(name) {
-      if (! types[name] %in% c("fct")) {
-        base::format(base::max(data[[name]], na.rm = TRUE))
-      } else {
-        "–"
-      }
-    }),
-    mean = base::sapply(names, function(name) {
-      if (! types[name] %in% c("fct", "ord", "chr")) {
-        base::format(base::mean(data[[name]], na.rm = TRUE))
-      } else {
-        "–"
-      }
-    }),
-    sd = base::sapply(names, function(name) {
-      if (! types[name] %in% c("fct", "ord", "chr")) {
-        base::format(stats::sd(data[[name]], na.rm = TRUE))
-      } else {
-        "–"
-      }
-    })
-  )
-}
-
 pretty_levels <- function(df) {
   # Apply modifications only to factor columns
   df |>

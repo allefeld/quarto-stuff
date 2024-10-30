@@ -1,7 +1,7 @@
-#' Implementations of `knit_print` to display statistical results nicely.
+#' Method overrides to display statistical results nicely.
 #'
-#' @version 0.1.0
-#' @date 2024-10-29
+#' @version 0.1.1
+#' @date 2024-10-30
 #' @author Carsten Allefeld
 
 
@@ -55,7 +55,6 @@ knit_print.intervals.lme <- function(al, options) {
     knitr::knit_print()
 }
 
-# print the result of `anova.gls` as a table
 knit_print.anova.lme <- function(al, options) {
   # extract denominator degrees of freedom from attribute "label"
   denDF <- as.numeric(
@@ -115,6 +114,53 @@ knit_print.intervals.gls <- function(al, options) {
     ) |>
     knitr::kable() |>
     knitr::knit_print()
+}
+
+# replacement for summary(data.frame)
+summary.data.frame <- function(data) {
+  names <- base::names(data)
+  types <- base::sapply(data, vctrs::vec_ptype_abbr)
+  tibble::tibble(
+    name = names,
+    type = gsub("chr", "**chr**", types),
+    n = base::format(base::colSums(!is.na(data))),
+    min = base::sapply(names, function(name) {
+      if (! types[name] %in% c("fct")) {
+        base::format(base::min(data[[name]], na.rm = TRUE))
+      } else {
+        "–"
+      }
+    }),
+    median = base::sapply(names, function(name) {
+      if (! types[name] %in% c("fct")) {
+        base::format(stats::quantile(data[[name]], 0.5, type = 1,
+                                     na.rm = TRUE))
+      } else {
+        "–"
+      }
+    }),
+    max = base::sapply(names, function(name) {
+      if (! types[name] %in% c("fct")) {
+        base::format(base::max(data[[name]], na.rm = TRUE))
+      } else {
+        "–"
+      }
+    }),
+    mean = base::sapply(names, function(name) {
+      if (! types[name] %in% c("fct", "ord", "chr")) {
+        base::format(base::mean(data[[name]], na.rm = TRUE))
+      } else {
+        "–"
+      }
+    }),
+    sd = base::sapply(names, function(name) {
+      if (! types[name] %in% c("fct", "ord", "chr")) {
+        base::format(stats::sd(data[[name]], na.rm = TRUE))
+      } else {
+        "–"
+      }
+    })
+  )
 }
 
 # nolint end
