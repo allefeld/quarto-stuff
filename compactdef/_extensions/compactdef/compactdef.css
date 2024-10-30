@@ -1,0 +1,21 @@
+/* style compact definition list */
+
+/* loose definition list */
+dd {
+  margin-left: 2rem;
+}
+
+/* compact definition list */
+div.compactdef dl {
+  display: grid;
+  grid-template-columns: max-content auto;
+  column-gap: 1rem;
+  row-gap: 0px;
+}
+div.compactdef dt {
+  grid-column: 1;
+}
+div.compactdef dd {
+  grid-column: 2;
+  margin: 0px;
+}

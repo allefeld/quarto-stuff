@@ -1,0 +1,59 @@
+---
+title: "Compact definition lists"
+embed-resources: true
+filters:
+  - compactdef
+---
+
+:::::: {.columns}
+::: {.column width="45%"}
+
+### Loose definition list
+
+```markdown
+Term 1
+
+:   Definition 1
+
+Term 2
+
+:   Definition 2a
+:   Definition 2b
+```
+
+Term 1
+
+:   Definition 1
+
+Term 2
+
+:   Definition 2a
+:   Definition 2b
+
+:::
+::: {.column width="10%"}
+:::
+::: {.column width="45%"}
+
+### Compact definition list
+
+```markdown
+Term 1
+:   Definition 1
+
+Term 2
+:   Definition 2a
+:   Definition 2b
+
+ 
+```
+
+Term 1
+:   Definition 1
+
+Term 2
+:   Definition 2a
+:   Definition 2b
+
+:::
+::::::
