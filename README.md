@@ -2,4 +2,6 @@
 
 `R/`: Utilities for R projects
 
-`compactdef/`: Compact Definition List Extension for Quarto
+`compactdef/`: Compact Definition List Extension
+
+`city-moodle/`: Custom Format for City Moodle

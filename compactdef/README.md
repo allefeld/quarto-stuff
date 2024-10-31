@@ -1,4 +1,4 @@
-# Compact Definition List Extension for Quarto
+# Compact Definition List Extension
 
 ![](lists.png)
 
@@ -12,7 +12,6 @@ This extension defines a "compact definition list" as a definition list which co
 
 The CSS also indents definitions in loose lists.
 
-
 ## Installing
 
 ```bash
@@ -21,8 +20,6 @@ quarto add allefeld/quarto-stuff/compactdef
 
 ## Using
 
-Add to the document or project metadata:
-
 ```yaml
 filters:
   - compactdef
@@ -30,4 +27,4 @@ filters:
 
 ## Example
 
-Here is the source code for a minimal example: [example.qmd](example.qmd).
+Source code for a minimal example: [example.qmd](example.qmd).

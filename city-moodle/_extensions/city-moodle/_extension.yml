@@ -1,0 +1,23 @@
+title: City-moodle
+author: Carsten Allefeld
+version: 0.1.0
+quarto-required: ">=1.5.0"
+contributes:
+  formats:
+    html:
+      author: "[Carsten Allefeld](mailto:carsten.allefeld@city.ac.uk)"
+      date: last-modified
+      date-format: D MMMM YYYY
+      theme:
+        - united
+        - custom.scss
+      include-in-header:
+        - header.html
+      pagetitle: "{{< meta title >}} – {{< meta programme >}}"
+      embed-resources: true
+      published-title: "Last Updated"
+      toc: true
+      toc-depth: 3
+      toc-expand: true
+      toc-title: "Contents"
+      shift-heading-level-by: 1
