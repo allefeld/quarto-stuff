@@ -1,6 +1,6 @@
 #' Method overrides to display statistical results nicely.
 #'
-#' @version 0.1.2
+#' @version 0.2.0
 #' @date 2024-10-30
 #' @author Carsten Allefeld
 
@@ -120,9 +120,16 @@ knit_print.intervals.gls <- function(al, options) {
 summary.data.frame <- function(data) {
   names <- base::names(data)
   types <- base::sapply(data, vctrs::vec_ptype_abbr)
+  scales <- dplyr::recode(
+    types,
+    "fct" = "nom.",
+    "ord" = "ord.",
+    "dbl" = "scale",
+    "chr" = "**text**"
+  )
   tibble::tibble(
     name = names,
-    type = gsub("chr", "**chr**", types),
+    scale = scales,
     n = base::format(base::colSums(!is.na(data))),
     min = base::sapply(names, function(name) {
       if (! types[name] %in% c("fct")) {
