@@ -176,18 +176,6 @@ confint_to_table <- function(ci) {
     )
 }
 
-pretty_levels <- function(df) {
-  # Apply modifications only to factor columns
-  df |>
-    mutate(
-      across(
-        where(is.factor), ~ {
-          f <- .
-          levels(f) <- paste0("=", levels(f))
-          f
-        }
-      )
-    )
-}
+
 
 # nolint end
